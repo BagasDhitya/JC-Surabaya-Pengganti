@@ -240,11 +240,12 @@ const light = new Light()
 // console.log('kondisi lampu : ', light.isOn)
 
 
-// --- Constructor ---
+// --- Constructor & Private/Public Property ---
 
+// contoh 1
 class Laptop {
-    brand: string;
-    ram: number;
+    private brand: string; // proses encapsulation (menyembunyikan property agar tidak bisa diakses di luar)
+    public ram: number;
 
     constructor(brand: string, ram: number) {
         this.brand = brand;
@@ -261,5 +262,45 @@ class Laptop {
 
 const laptop1 = new Laptop('Apple Macbook Pro', 16)
 const laptop2 = new Laptop('Asus Vivobook', 8)
-console.log('info laptop yang sedang diinputkan : ', laptop1.getDisplay())
-console.log('info laptop yang sedang diinputkan : ', laptop2.getDisplay())
+// console.log('info laptop yang sedang diinputkan : ', laptop1.getDisplay())
+// console.log('info laptop yang sedang diinputkan : ', laptop2.getDisplay())
+
+// console.log(laptop1.brand) -> tidak bisa dipanggil karena ada proses encapsulation
+
+// contoh 2
+class Motorcycle {
+    private fuel: number = 50;
+    public amount: number = 0
+
+    constructor(amount: number) {
+        this.amount = amount
+    }
+
+    riding() {
+        console.log("Riding the motorcycle ...")
+        if (this.fuel > 0) {
+            this.fuel -= 5
+        }
+    }
+
+    brake() {
+        console.log("Brake the motorcycle ...")
+    }
+
+    refillFuel() {
+        return this.fuel += this.amount
+    }
+
+    checkFuel() {
+        return this.fuel
+    }
+}
+
+const motorcycle = new Motorcycle(10)
+
+console.log('cek isi bensin : ', motorcycle.checkFuel())
+motorcycle.riding()
+console.log('cek isi bensin setelah motor berjalan : ', motorcycle.checkFuel())
+console.log('mlipir ke pom bensin ...')
+motorcycle.refillFuel()
+console.log('setelah isi bensin : ', motorcycle.checkFuel())
